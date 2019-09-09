@@ -8,46 +8,42 @@ import javax.persistence.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class ItemPedido implements Serializable{
+public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	/* Id embutido em outro Id Auxiliar */
+
 	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
-	
-	private Double Desconto;
-	private Integer Quantidade;
-	private Double Preco;
-	
+
+	private Double desconto;
+	private Integer quantidade;
+	private Double preco;
+
 	public ItemPedido() {
-		
 	}
 
 	public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Double preco) {
 		super();
 		id.setPedido(pedido);
 		id.setProduto(produto);
-		Desconto = desconto;
-		Quantidade = quantidade;
-		Preco = preco;
+		this.desconto = desconto;
+		this.quantidade = quantidade;
+		this.preco = preco;
 	}
 
-	
-	/*
-	 * getters and setters individuais de pedido e produto separados
-	 */
+	public double getSubTotal() {
+		return (preco - desconto) * quantidade;
+	}
+
 	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
-	
-	public Produto getProduto(){
+
+	public Produto getProduto() {
 		return id.getProduto();
 	}
-	
-	
-	
+
 	public ItemPedidoPK getId() {
 		return id;
 	}
@@ -57,27 +53,27 @@ public class ItemPedido implements Serializable{
 	}
 
 	public Double getDesconto() {
-		return Desconto;
+		return desconto;
 	}
 
 	public void setDesconto(Double desconto) {
-		Desconto = desconto;
+		this.desconto = desconto;
 	}
 
 	public Integer getQuantidade() {
-		return Quantidade;
+		return quantidade;
 	}
 
 	public void setQuantidade(Integer quantidade) {
-		Quantidade = quantidade;
+		this.quantidade = quantidade;
 	}
 
 	public Double getPreco() {
-		return Preco;
+		return preco;
 	}
 
 	public void setPreco(Double preco) {
-		Preco = preco;
+		this.preco = preco;
 	}
 
 	@Override
@@ -104,6 +100,5 @@ public class ItemPedido implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
 }
