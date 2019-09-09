@@ -11,7 +11,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.nelioalves.cursomc.domain.Enums.EstadoPagamento;
+import com.nelioalves.cursomc.domain.enums.EstadoPagamento;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
